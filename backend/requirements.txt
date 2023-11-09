@@ -165,8 +165,8 @@ tiktoken==0.5.1
 tinycss2==1.2.1
 tokenizers==0.14.1
 tomli==2.0.1
-torch==2.2.0.dev20231108
-torchvision==0.17.0.dev20231108
+torch==2.1.0
+torchvision==0.16.0
 tornado==6.3.3
 tqdm==4.66.1
 traitlets==5.13.0
