@@ -24,7 +24,7 @@ class IndexFetcher:
         self.get_index()
 
     def make_vector_store(self, table_name):
-        db_name = "sitemap"
+        db_name = "sitemap_aoeu"
         url = make_url(PG_URL)
         vector_store = PGVectorStore.from_params(
             database=db_name,
@@ -35,6 +35,7 @@ class IndexFetcher:
             table_name=table_name,
             embed_dim=384,  # openai embedding dimension
         )
+
         return vector_store
 
     def get_llm(self):
@@ -76,7 +77,10 @@ class IndexFetcher:
             )
         else:
             loader = download_loader(self.loader_name)()
-            documents = loader.load_data(urls=[self.url])
+            if self.loader_name == 'SitemapReader':
+                documents = loader.load_data(sitemap_url=self.url)
+            else:
+                documents = loader.load_data(urls=[self.url])
             self.index = VectorStoreIndex.from_documents(
                 documents, storage_context=self.storage_context, service_context=self.service_context
             )
