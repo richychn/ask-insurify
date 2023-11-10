@@ -1,10 +1,9 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from index.index_fetcher import IndexFetcher
-from index.db import table_exists
+from app.index import get_index
+
 
 class Query(BaseModel):
-    url: str
     question: str
 
 app = FastAPI()
@@ -15,8 +14,7 @@ async def root():
 
 @app.post("/ask")
 async def ask(query: Query):
-    is_data_loaded = table_exists(query.url)
-    index = IndexFetcher(url=query.url, is_data_loaded=is_data_loaded).index
+    index = get_index()
     query_engine = index.as_query_engine()
     response = query_engine.query(query.question)
     sources = list({v['Source'] for v in response.metadata.values()})
