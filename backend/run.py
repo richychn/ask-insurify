@@ -1,6 +1,6 @@
 from app.index import get_index
 
-question = input("What is your question about car insurance?")
+question = input("What is your question about car insurance?\n")
 
 index = get_index()
 query_engine = index.as_query_engine()
