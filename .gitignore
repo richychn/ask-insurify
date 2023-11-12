@@ -2,3 +2,4 @@ backend/local.py
 .DS_store
 **/__pycache__/**
 *.pyc
+**/weights/*
