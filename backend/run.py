@@ -1,6 +1,6 @@
 from app.index import get_index
 
-question = "What is SR22?"
+question = input("What is your question about car insurance?")
 
 index = get_index()
 query_engine = index.as_query_engine()
